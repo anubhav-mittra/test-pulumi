@@ -19,10 +19,10 @@ func TestImage_FullPath(t *testing.T) {
 	registryURL := "us-central1-docker.pkg.dev/test-project/test-registry"
 	imageName := "test-app-app"
 	tag := "latest"
-	
+
 	fullPath := fmt.Sprintf("%s/%s:%s", registryURL, imageName, tag)
 	expected := "us-central1-docker.pkg.dev/test-project/test-registry/test-app-app:latest"
-	
+
 	assert.Equal(t, expected, fullPath)
 }
 
@@ -30,9 +30,9 @@ func TestImage_FullPath(t *testing.T) {
 func TestImage_BuildCommandFormat(t *testing.T) {
 	imageTag := "us-central1-docker.pkg.dev/test-project/test-registry/test-app-app:latest"
 	appPath := "../app"
-	
+
 	buildCmd := fmt.Sprintf("docker build -t %s %s", imageTag, appPath)
-	
+
 	assert.Contains(t, buildCmd, "docker build")
 	assert.Contains(t, buildCmd, "-t")
 	assert.Contains(t, buildCmd, imageTag)
@@ -43,7 +43,7 @@ func TestImage_BuildCommandFormat(t *testing.T) {
 func TestImage_PushCommandFormat(t *testing.T) {
 	imageTag := "us-central1-docker.pkg.dev/test-project/test-registry/test-app-app:latest"
 	pushCmd := fmt.Sprintf("docker push %s", imageTag)
-	
+
 	assert.Contains(t, pushCmd, "docker push")
 	assert.Contains(t, pushCmd, imageTag)
 }
@@ -51,11 +51,11 @@ func TestImage_PushCommandFormat(t *testing.T) {
 // Test different regions in registry URL
 func TestImage_DifferentRegions(t *testing.T) {
 	testCases := []struct {
-		location string
-		project  string
+		location       string
+		project        string
 		expectedPrefix string
 	}{
-		{"us-central1", "test-project", "us-central1-docker.pkg.dev"}, 
+		{"us-central1", "test-project", "us-central1-docker.pkg.dev"},
 		{"europe-west1", "test-project", "europe-west1-docker.pkg.dev"},
 		{"asia-east1", "test-project", "asia-east1-docker.pkg.dev"},
 	}

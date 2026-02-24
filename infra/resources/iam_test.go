@@ -20,7 +20,7 @@ func TestServiceAccount_EmailFormat(t *testing.T) {
 	project := "test-project"
 	accountID := fmt.Sprintf("%s-cloudrun-sa", prefix)
 	email := fmt.Sprintf("%s@%s.iam.gserviceaccount.com", accountID, project)
-	
+
 	assert.Contains(t, email, prefix)
 	assert.Contains(t, email, "cloudrun-sa")
 	assert.Contains(t, email, "@test-project.iam.gserviceaccount.com")
@@ -29,7 +29,7 @@ func TestServiceAccount_EmailFormat(t *testing.T) {
 // Test different prefix formats
 func TestServiceAccount_DifferentPrefixes(t *testing.T) {
 	testCases := []struct {
-		prefix          string
+		prefix            string
 		expectedAccountID string
 	}{
 		{"test", "test-cloudrun-sa"},

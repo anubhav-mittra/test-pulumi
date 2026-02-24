@@ -17,10 +17,10 @@ func TestCloudRun_ServiceNaming(t *testing.T) {
 // Test environment variable configuration
 func TestCloudRun_EnvironmentVariables(t *testing.T) {
 	envVars := map[string]string{
-		"GCP_PROJECT":       "test-project",
+		"GCP_PROJECT":        "test-project",
 		"FIRESTORE_DATABASE": "test-db",
 	}
-	
+
 	assert.Equal(t, "test-project", envVars["GCP_PROJECT"])
 	assert.Equal(t, "test-db", envVars["FIRESTORE_DATABASE"])
 	assert.Len(t, envVars, 2)
@@ -30,13 +30,13 @@ func TestCloudRun_EnvironmentVariables(t *testing.T) {
 func TestCloudRun_UnauthenticatedAccessPolicy(t *testing.T) {
 	allowUnauthenticated := true
 	var member string
-	
+
 	if allowUnauthenticated {
 		member = "allUsers"
 	} else {
 		member = "serviceAccount:sa@project.iam.gserviceaccount.com"
 	}
-	
+
 	assert.Equal(t, "allUsers", member)
 }
 
@@ -44,13 +44,13 @@ func TestCloudRun_UnauthenticatedAccessPolicy(t *testing.T) {
 func TestCloudRun_AuthenticatedAccessPolicy(t *testing.T) {
 	allowUnauthenticated := false
 	var requiresAuth bool
-	
+
 	if allowUnauthenticated {
 		requiresAuth = false
 	} else {
 		requiresAuth = true
 	}
-	
+
 	assert.True(t, requiresAuth)
 }
 

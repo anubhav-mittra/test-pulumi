@@ -20,7 +20,6 @@ func (m *mockPulumiProvider) Call(args pulumi.MockCallArgs) (resource.PropertyMa
 	return args.Args, nil
 }
 
-
 func TestLoadConfig_WithAllConfigValues(t *testing.T) {
 	// Set environment variables for config
 	os.Setenv("PULUMI_CONFIG", `{"hello-pulumi:resourcePrefix":"my-app","hello-pulumi:cloudRunAllowUnauthenticated":"true","hello-pulumi:firestoreLocation":"us-east1","gcp:project":"test-project-123","gcp:region":"us-west1"}`)
@@ -45,11 +44,11 @@ func TestLoadConfig_WithAllConfigValues(t *testing.T) {
 func TestGetProvider_Success(t *testing.T) {
 	err := pulumi.RunErr(func(ctx *pulumi.Context) error {
 		cfg := &AppConfig{
-			GCPProject: "test-project",
-			GCPRegion:  "us-central1",
-			ResourcePrefix: "test",
+			GCPProject:                   "test-project",
+			GCPRegion:                    "us-central1",
+			ResourcePrefix:               "test",
 			CloudRunAllowUnauthenticated: true,
-			FirestoreLocation: "us-central1",
+			FirestoreLocation:            "us-central1",
 		}
 
 		provider, err := GetProvider(ctx, cfg)
@@ -65,11 +64,11 @@ func TestGetProvider_Success(t *testing.T) {
 func TestAppConfig_DefaultValues(t *testing.T) {
 	// Test AppConfig struct with default values
 	cfg := &AppConfig{
-		GCPProject: "test-project",
-		GCPRegion: "us-central1",
-		ResourcePrefix: "test-pulumi-trial",
+		GCPProject:                   "test-project",
+		GCPRegion:                    "us-central1",
+		ResourcePrefix:               "test-pulumi-trial",
 		CloudRunAllowUnauthenticated: false,
-		FirestoreLocation: "us-central1",
+		FirestoreLocation:            "us-central1",
 	}
 
 	assert.Equal(t, "test-project", cfg.GCPProject)
@@ -82,11 +81,11 @@ func TestAppConfig_DefaultValues(t *testing.T) {
 func TestAppConfig_CustomValues(t *testing.T) {
 	// Test AppConfig with custom values
 	cfg := &AppConfig{
-		GCPProject: "custom-project",
-		GCPRegion: "europe-west1",
-		ResourcePrefix: "my-app",
+		GCPProject:                   "custom-project",
+		GCPRegion:                    "europe-west1",
+		ResourcePrefix:               "my-app",
 		CloudRunAllowUnauthenticated: true,
-		FirestoreLocation: "europe-west3",
+		FirestoreLocation:            "europe-west3",
 	}
 
 	assert.Equal(t, "custom-project", cfg.GCPProject)
@@ -100,11 +99,10 @@ func TestAppConfig_EmptyProject(t *testing.T) {
 	// Test that empty project would be caught (negative case)
 	cfg := &AppConfig{
 		GCPProject: "",
-		GCPRegion: "us-central1",
+		GCPRegion:  "us-central1",
 	}
 
 	// Project should be empty
 	assert.Empty(t, cfg.GCPProject)
 	// In real usage, LoadConfig would fail with empty project
 }
-
