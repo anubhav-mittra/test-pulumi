@@ -1,0 +1,40 @@
+# Binaries
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+bin/
+dist/
+
+# Test binary and coverage data
+*.test
+*.out
+coverage.txt
+
+# Go workspace files
+go.work
+go.work.sum
+
+# Pulumi state files (state is in GCS backend)
+*.tfstate
+*.tfstate.*
+.pulumi/
+
+# Pulumi stack configuration (may contain secrets)
+Pulumi.*.yaml
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Build artifacts
+app/main
+infra/main

@@ -1,0 +1,5 @@
+name: hello-pulumi
+description: GCP infrastructure for containerized app with Cloud Run, Artifact Registry, and Firestore
+runtime: go
+backend:
+  url: gs://scratch-test-pulumi-state-dev
